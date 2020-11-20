@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+  	<title>Świdnik - mapa mobilności</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+		
+	
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4">
+		  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <a href="#"><span class="fa fa-home mr-3"></span> Mapa Mobilności</a>
+	          </li>
+			  <li>
+                <a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-briefcase mr-3"></span> Grupy POI</a>
+                <ul class="collapse list-unstyled" id="groupSubmenu">
+                    <li>
+						<a href="#buildingsSubSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Budynki</a>
+						<ul class="collapse list-unstyled" id="buildingsSubSubmenu">
+							<li>
+								<a href="groups_template.html">Centra handlowe</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Kościoły</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Szkoły</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Urzędy</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Zakłady Pracy</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+                        <a href="groups_template.html">Parki</a>
+                    </li>
+					<li>
+                        <a href="groups_template.html">Przystanki</a>
+                    </li>
+                    <li>
+                        <a href="groups_template.html">Ulice</a>
+                    </li>
+                    <li>
+                        <a href="groups_template.html">Ścieżki rowerowe</a>
+                    </li>
+                </ul>
+			  </li>
+	          <li>
+				<a href="poi.html"><span class="fa fa-sticky-note mr-3"></span>POI</a>
+	          </li>
+			  <li>
+	            <a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
+	          </li>
+	          <li>
+				<a href="contact.html"><span class="fa fa-paper-plane mr-3"></span>Kontakt</a>
+	          </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright AiRonmen &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Mapa mobilności</h2>
+        <div id="mapid" style="width: 600px; height: 400px;"></div>
+		<script>
+
+			var mymap = L.map('mapid').setView([51.219572, 22.699728], 13);
+
+			L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+				maxZoom: 18,
+				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+					'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+					'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+				id: 'mapbox/streets-v11',
+				tileSize: 512,
+				zoomOffset: -1
+			}).addTo(mymap);
+
+
+			var popup = L.popup();
+
+			function onMapClick(e) {
+				popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(mymap);
+			}
+
+		mymap.on('click', onMapClick);
+
+		</script>
+      </div>
+		</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

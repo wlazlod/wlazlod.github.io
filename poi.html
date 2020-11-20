@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+  	<title>Świdnik - mapa mobilności</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		
+		    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+			<script type="text/javascript">
+				google.charts.load('current', {'packages':['corechart']});
+				google.charts.setOnLoadCallback(drawChart);
+
+				function drawChart() {
+					var data = google.visualization.arrayToDataTable([
+						['Year', 'Sales', 'Expenses'],
+						['2004',  1000,      400],
+						['2005',  1170,      460],
+						['2006',  660,       1120],
+						['2007',  1030,      540]
+					]);
+
+					var options = {
+						title: 'Company Performance',
+						curveType: 'function',
+						legend: { position: 'bottom' }
+					};
+
+					var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+				chart.draw(data, options);
+				}
+			</script>
+			<script type="text/javascript">
+				google.charts.load('current', {'packages':['corechart']});
+				google.charts.setOnLoadCallback(drawChart);
+
+				function drawChart() {
+
+					var data = google.visualization.arrayToDataTable([
+						['Task', 'Hours per Day'],
+						['Work',     11],
+						['Eat',      2],
+						['Commute',  2],
+						['Watch TV', 2],
+						['Sleep',    7]
+					]);
+
+					var options = {
+						title: 'My Daily Activities'
+					};
+
+					var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+					chart.draw(data, options);
+				}
+			</script>
+		
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4">
+		  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li>
+	            <a href="index.html"><span class="fa fa-home mr-3"></span> Mapa Mobilności</a>
+	          </li>
+			  <li>
+                <a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-briefcase mr-3"></span> Grupy POI</a>
+                <ul class="collapse list-unstyled" id="groupSubmenu">
+                    <li>
+						<a href="#buildingsSubSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Budynki</a>
+						<ul class="collapse list-unstyled" id="buildingsSubSubmenu">
+							<li>
+								<a href="groups_template.html">Centra handlowe</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Kościoły</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Szkoły</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Urzędy</a>
+							</li>
+							<li>
+								<a href="groups_template.html">Zakłady Pracy</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+                        <a href="groups_template.html">Parki</a>
+                    </li>
+					<li>
+                        <a href="groups_template.html">Przystanki</a>
+                    </li>
+                    <li>
+                        <a href="groups_template.html">Ulice</a>
+                    </li>
+                    <li>
+                        <a href="groups_template.html">Ścieżki rowerowe</a>
+                    </li>
+                </ul>
+			  </li>
+	          <li>
+				<a href="poi.html" class="active"><span class="fa fa-sticky-note mr-3"></span>POI</a>
+	          </li>
+			  <li>
+	            <a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
+	          </li>
+	          <li>
+				<a href="contact.html"><span class="fa fa-paper-plane mr-3"></span>Kontakt</a>
+	          </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright AiRonmen &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Park Brzeziny</h2>
+        <div id="curve_chart" style="width: 900px; height: 500px"></div> 
+		
+		<div id="piechart" style="width: 900px; height: 500px"></div> 
+		
+      </div>
+		</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

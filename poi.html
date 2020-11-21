@@ -9,56 +9,7 @@
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/style.css">
-		
-		    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-			<script type="text/javascript">
-				google.charts.load('current', {'packages':['corechart']});
-				google.charts.setOnLoadCallback(drawChart);
-
-				function drawChart() {
-					var data = google.visualization.arrayToDataTable([
-						['Year', 'Sales', 'Expenses'],
-						['2004',  1000,      400],
-						['2005',  1170,      460],
-						['2006',  660,       1120],
-						['2007',  1030,      540]
-					]);
-
-					var options = {
-						title: 'Company Performance',
-						curveType: 'function',
-						legend: { position: 'bottom' }
-					};
-
-					var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-				chart.draw(data, options);
-				}
-			</script>
-			<script type="text/javascript">
-				google.charts.load('current', {'packages':['corechart']});
-				google.charts.setOnLoadCallback(drawChart);
-
-				function drawChart() {
-
-					var data = google.visualization.arrayToDataTable([
-						['Task', 'Hours per Day'],
-						['Work',     11],
-						['Eat',      2],
-						['Commute',  2],
-						['Watch TV', 2],
-						['Sleep',    7]
-					]);
-
-					var options = {
-						title: 'My Daily Activities'
-					};
-
-					var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-					chart.draw(data, options);
-				}
-			</script>
+		<script src="js/echarts.min.js"></script>
 		
   </head>
   <body>
@@ -138,7 +89,6 @@
       <div id="content" class="p-4 p-md-5 pt-5">
         <h2 class="mb-4" id="name"></h2>
 		
-        <div id="curve_chart" style="width: 900px; height: 500px"></div> 
 			<script>
 				const queryString = window.location.search;
 
@@ -148,10 +98,178 @@
 			
 				document.getElementById("name").innerHTML = name;	
 			</script> 
-		<div id="piechart" style="width: 900px; height: 500px"></div> 
+		<div class="row">
+		  <div class="col-sm-6" id="barchart" style="width: 100%; min-height: 400px">
+		  </div>  
+		  <div class="col-sm-6" id="piecalendar" style="width: 100%; min-height: 400px">
+		  </div>
+		</div>
 		
       </div>
 		</div>
+		
+    <script type="text/javascript">
+        // based on prepared DOM, initialize echarts instance
+        var myChart = echarts.init(document.getElementById('barchart'));
+
+        // specify chart configuration item and data
+        var option = {
+			legend: {},
+			tooltip: {},
+			dataset: {
+			source: [
+					['product', '2015', '2016', '2017'],
+					['Matcha Latte', 43.3, 85.8, 93.7],
+					['Milk Tea', 83.1, 73.4, 55.1],
+					['Cheese Cocoa', 86.4, 65.2, 82.5],
+					['Walnut Brownie', 72.4, 53.9, 39.1]
+				]
+			},
+			xAxis: {type: 'category'},
+			yAxis: {},
+			// Declare several bar series, each will be mapped
+			// to a column of dataset.source by default.
+			series: [
+				{type: 'bar'},
+				{type: 'bar'},
+				{type: 'bar'}
+			]
+		};
+
+
+        // use configuration item and data specified to show chart
+        myChart.setOption(option);
+		
+		window.onresize = function() {
+			myChart.resize();
+		};
+    </script>
+
+	<script type="text/javascript">
+		var dom = document.getElementById("piecalendar");
+		var myChart = echarts.init(dom);
+		var app = {};
+		option = null;
+		var cellSize = [60, 60];
+		var pieRadius = 25;
+
+		function getVirtulData() {
+			var date = +echarts.number.parseDate('2017-02-01');
+			var end = +echarts.number.parseDate('2017-03-01');
+			var dayTime = 3600 * 24 * 1000;
+			var data = [];
+			for (var time = date; time < end; time += dayTime) {
+				data.push([
+					echarts.format.formatTime('yyyy-MM-dd', time),
+					Math.floor(Math.random() * 10000)
+				]);
+			}
+			return data;
+		}
+
+		function getPieSeries(scatterData, chart) {
+			return echarts.util.map(scatterData, function (item, index) {
+				var center = chart.convertToPixel('calendar', item);
+				return {
+					id: index + 'pie',
+					type: 'pie',
+					center: center,
+					label: {
+						normal: {
+							formatter: '{c}',
+							position: 'inside'
+						}
+					},
+					radius: pieRadius,
+					data: [
+						{name: 'samochody', value: Math.round(Math.random() * 24)},
+						{name: 'rowery', value: Math.round(Math.random() * 24)},
+						{name: 'piesi', value: Math.round(Math.random() * 24)}
+					]
+				};
+			});
+		}
+
+		function getPieSeriesUpdate(scatterData, chart) {
+			return echarts.util.map(scatterData, function (item, index) {
+				var center = chart.convertToPixel('calendar', item);
+				return {
+					id: index + 'pie',
+					center: center
+				};
+			});
+		}
+
+		var scatterData = getVirtulData();
+
+		option = {
+			tooltip : {},
+			legend: {
+				data: ['samochody', 'rowery', 'piesi'],
+				bottom: 20
+			},
+			calendar: {
+				top: 'middle',
+				left: 'center',
+				orient: 'vertical',
+				cellSize: cellSize,
+				yearLabel: {
+					show: false,
+					textStyle: {
+						fontSize: 30
+					}
+				},
+				dayLabel: {
+					margin: 20,
+					firstDay: 1,
+					nameMap: ['nd', 'pn', 'wt', 'śr', 'cz', 'pt', 'sb']
+				},
+				monthLabel: {
+					show: false
+				},
+				range: ['2017-02']
+			},
+			series: [{
+				id: 'label',
+				type: 'scatter',
+				coordinateSystem: 'calendar',
+				symbolSize: 1,
+				label: {
+					normal: {
+						show: true,
+						formatter: function (params) {
+							return echarts.format.formatTime('dd', params.value[0]);
+						},
+						offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 10],
+						textStyle: {
+							color: '#000',
+							fontSize: 14
+						}
+					}
+				},
+				data: scatterData
+			}]
+		};
+
+		var pieInitialized;
+		setTimeout(function () {
+			pieInitialized = true;
+			myChart.setOption({
+				series: getPieSeries(scatterData, myChart)
+			});
+		}, 10);
+
+		app.onresize = function () {
+			if (pieInitialized) {
+				myChart.setOption({
+					series: getPieSeriesUpdate(scatterData, myChart)
+				});
+			}
+		};;
+		if (option && typeof option === "object") {
+			myChart.setOption(option, true);
+		}
+       </script>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>

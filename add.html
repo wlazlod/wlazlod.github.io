@@ -51,7 +51,7 @@
 				reader.onload = function () {
 					console.log(reader.result);
 					var xhr = new XMLHttpRequest();
-					var url = "http://ec2-18-188-99-138.us-east-2.compute.amazonaws.com:8988/image";
+					var url = "https://vj8jq3kuo9.execute-api.us-east-2.amazonaws.com/prod/image";
 					xhr.open("POST", url, true);
 					xhr.setRequestHeader("Content-Type", "application/json");
 					xhr.onreadystatechange = function () {
@@ -75,8 +75,32 @@
 				uploading = false;
 				update_submit_button_status();
 				console.log(resp);
-				$("#upload_res").text(JSON.stringify(resp));
+ 
+				var people = 0;
+				var cars = 0;
+				var bikes = 0;
+				var dogs = 0;
+				
+				for (detection in resp.detections){
+					if(detection.length < 1){ break; }
+					det = resp.detections[detection]
+					console.log(det);
+					console.log(det[4]);
+					if(det[4] == "person") {people++;}
+					if(det[4] == "car") {cars++;}
+					if(det[4] == "truck") {cars++;}
+					if(det[4] == "bus") {cars++;}
+					if(det[4] == "bike") {bikes++;}
+					if(det[4] == "dog") {dogs++;}
+				};	
+				
+				document.getElementById('upload_res').innerHTML = "<br>Wykryte obiekty:<li>Piesi: " + people.toString() + "</li><li>Samochody: " + cars.toString() + "</li><li>Rowery: " + bikes.toString()+ "</li><li>Psy: " + dogs.toString() + "</li>";
+ 
+				img_src = "https://vj8jq3kuo9.execute-api.us-east-2.amazonaws.com/prod/" + resp.marked_image;
+				document.getElementById('img_div').innerHTML = '<img src="' + img_src + '" />';
 			}
+			</script>
+				
 		</script>
 
 		
@@ -178,17 +202,14 @@
 						<input type="text" class="form-control" id="prefered_name" placeholder="POI ID"
 							   maxlength="20">
 					</div>
-
-					<div class="form-group">
-
-					</div>
 					<button disabled="true" id='submit_btn' onclick="send_button_click()" class="btn btn-primary">Upload</button>
 				</div>
 				<br>
 			</div>
 
-			<div id="upload_res"></div>
-			
+			<div id="img_div" class="col-sm-12 d-flex justify-content-center"></div>
+			<div id="upload_res" class="col-sm-6 offset-sm-3 text-left"></div>
+
 		  </div>
 		</div>
 		

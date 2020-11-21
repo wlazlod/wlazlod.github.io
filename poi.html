@@ -102,7 +102,7 @@
 				document.getElementById("name").innerHTML = name;
 				
 				var xhr = new XMLHttpRequest();
-				var url = "http://ec2-18-188-99-138.us-east-2.compute.amazonaws.com:8988/poi_info?data=%7B%22poi_id%22:%22" + id +"%22%7D";
+				var url = "https://vj8jq3kuo9.execute-api.us-east-2.amazonaws.com/prod/poi_info/" + id;
 				xhr.open("GET", url, true);
 				
 				xhr.send();

@@ -9,11 +9,77 @@
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/style.css">
+		<script src="js/echarts.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+		<script>
+			var uploading = false;
+
+			function is_button_enabled() {
+				if(uploading)
+					return false;
+				if (!document.querySelector('#selected_file').files[0])
+					return false;
+				return true;
+			}
+
+			function update_submit_button_status() {
+				btn = $('#submit_btn')
+				btn.prop('disabled', !is_button_enabled());
+				if(uploading) {
+					btn.text("Uploading");
+				} else {
+					btn.text("Upload");
+				}
+			}
+
+			function send_button_click() {
+				uploading = true;
+				update_submit_button_status();
+				try {
+					var file = document.querySelector('#selected_file').files[0];
+					prefered_name = document.getElementById("prefered_name").value
+					send(file, prefered_name)
+				} catch(error) {
+					display_upload_error(500);
+				}
+			}
+
+			function send(file, prefered_name) {
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = function () {
+					console.log(reader.result);
+					var xhr = new XMLHttpRequest();
+					var url = "http://ec2-18-188-99-138.us-east-2.compute.amazonaws.com:8988/image";
+					xhr.open("POST", url, true);
+					xhr.setRequestHeader("Content-Type", "application/json");
+					xhr.onreadystatechange = function () {
+						var resp = JSON.parse(xhr.responseText);
+						console.log(resp);
+						display_upload_success(resp)
+					};
+					var data = JSON.stringify({
+						"img_data" : reader.result,
+						"poi_id" : prefered_name,
+						"timestamp" : 252525252
+					});
+					xhr.send(data);
+				};
+				reader.onerror = function (error) {
+					console.log('Error: ', error);
+				};
+			}
+
+			function display_upload_success(resp) {
+				uploading = false;
+				update_submit_button_status();
+				console.log(resp);
+				$("#upload_res").text(JSON.stringify(resp));
+			}
+		</script>
+
 		
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-		
-	
   </head>
   <body>
 		
@@ -27,7 +93,7 @@
         </div>
 				<div class="p-4">
 		  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
-	        	        <ul class="list-unstyled components mb-5">
+	        <ul class="list-unstyled components mb-5">
 	          <li>
 	            <a href="index.html"><span class="fa fa-map-o mr-3"></span> Mapa Mobilności</a>
 	          </li>
@@ -69,12 +135,12 @@
                 </ul>
 			  </li>
 	          <li>
-				<a href="poi.html?id=Park%20Brzeziny" class="active"><span class="fa fa-map-marker mr-3"></span>POI</a>
-	          </li>
-			  <li>
-	            <a href="add.html"><span class="fa fa-camera-retro mr-3"></span>Rozpoznawanie obiektów</a>
+				<a href="poi.html?id=1&name=Park%20Brzeziny" class="active"><span class="fa fa-map-marker mr-3"></span>POI</a>
 	          </li>
 			  <li class="active">
+	            <a href="add.html"><span class="fa fa-camera-retro mr-3"></span>Rozpoznawanie obiektów</a>
+	          </li>
+			  <li>
 	            <a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
 	          </li>
 	          <li>
@@ -93,38 +159,39 @@
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">O projekcie</h2>
+        <h2 class="mb-4" id="name">Prezentacja rozpoznawania obrazów</h2>
+		<div>
+			<div class="col-sm-6 offset-sm-3 text-left">
+				<div class="info-form">
 
-		<div class="row">
-		  <div class="col-sm-12">
-			<div class="card">
-			  <div class="card-body">
-				<h5 class="card-title">Cel Projektu</h5>
-				<p class="card-text">Tu będzie cel projektu</p>
-			  </div>
+					<div class="form-group">
+						<div class="custom-file">
+							<input type="file" onChange="update_submit_button_status();" class="form-control-file" id="selected_file" /><br>
+							<label class="custom-file-label" for="selected_file" id="file_name">Choose file</label>
+							<script>
+								$('#selected_file').on('change',function(){
+									var fileName = document.querySelector('#selected_file').files[0].name;
+									$('#file_name').html(fileName);
+								})
+							</script>
+						</div>
+						<input type="text" class="form-control" id="prefered_name" placeholder="POI ID"
+							   maxlength="20">
+					</div>
+
+					<div class="form-group">
+
+					</div>
+					<button disabled="true" id='submit_btn' onclick="send_button_click()" class="btn btn-primary">Upload</button>
+				</div>
+				<br>
 			</div>
+
+			<div id="upload_res"></div>
+			
 		  </div>
 		</div>
-		</br>
-		<div class ="row">
-		  <div class="col-sm-6">
-			<div class="card">
-			  <div class="card-body">
-				<h5 class="card-title">Korzyści</h5>
-				<p class="card-text">Tu będzie opis korzyści</p>
-			  </div>
-			</div>
-		  </div>
-		  <div class="col-sm-6">
-			<div class="card">
-			  <div class="card-body">
-				<h5 class="card-title">Technologia</h5>
-				<p class="card-text">Tu będzie opis technologii</p>
-			  </div>
-			</div>
-		  </div>
-		</div>
-
+		
 
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>

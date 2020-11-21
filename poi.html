@@ -26,7 +26,7 @@
 		  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
 	        <ul class="list-unstyled components mb-5">
 	          <li>
-	            <a href="index.html"><span class="fa fa-home mr-3"></span> Mapa Mobilności</a>
+	            <a href="index.html"><span class="fa fa-map-o mr-3"></span> Mapa Mobilności</a>
 	          </li>
 			  <li>
                 <a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-briefcase mr-3"></span> Grupy POI</a>
@@ -69,6 +69,9 @@
 				<a href="poi.html?id=1&name=Park%20Brzeziny" class="active"><span class="fa fa-sticky-note mr-3"></span>POI</a>
 	          </li>
 			  <li>
+	            <a href="add.html"><span class="fa fa-camera-retro mr-3"></span>Rozpoznawanie obiektów</a>
+	          </li>
+			  <li>
 	            <a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
 	          </li>
 	          <li>
@@ -99,7 +102,7 @@
 				document.getElementById("name").innerHTML = name;
 				
 				var xhr = new XMLHttpRequest();
-				var url = "http://ec2-18-188-99-138.us-east-2.compute.amazonaws.com:8988/poi_info?data=%7B%22poi_id%22:%22park_regana%22%7D";
+				var url = "http://ec2-18-188-99-138.us-east-2.compute.amazonaws.com:8988/poi_info?data=%7B%22poi_id%22:%22" + id +"%22%7D";
 				xhr.open("GET", url, true);
 				
 				xhr.send();
@@ -113,6 +116,7 @@
 						console.log(JSON.parse(xhr.responseText))
 						name = answer.poi_name;
 						barChartBus(answer.bus_occupancy)
+						chartSeries(answer.car_occupancy)
 					}
 					document.getElementById("name").innerHTML = name;
 					
@@ -130,7 +134,7 @@
 					  var hour = a.getHours();
 					  var min = a.getMinutes();
 					  var sec = a.getSeconds();
-					  var time = year + '/' + month + '/' + date + ' ' + hour + ':' + min;
+					  var time = year + '/' + month + '/' + date
 					  return time;
 				}
 				
@@ -139,9 +143,9 @@
 					var myChart = echarts.init(document.getElementById('barchart'));
 					
 					console.log(data)
-					data_list = [['date', 'value']]
+					data_list = [['Data', 'Liczba pasażerów na przystanku']]
 					for (x of data) {
-						data_list = data_list.concat([[x.dt, x.val]])
+						data_list = data_list.concat([[timeConverter(x.ts), x.val]])
 					}
 					console.log(data_list)
 					
@@ -156,8 +160,6 @@
 						// Declare several bar series, each will be mapped
 						// to a column of dataset.source by default.
 						series: [
-							{type: 'bar'},
-							{type: 'bar'},
 							{type: 'bar'}
 						]
 					};
@@ -170,6 +172,134 @@
 						myChart.resize();
 					};
 				}
+				
+				function chartSeries(data){
+					var dom = document.getElementById("piecalendar");
+					var myChart = echarts.init(dom);
+					var app = {};
+					option = null;
+					var cellSize = [60, 60];
+					var pieRadius = 25;
+
+					function getVirtulData() {
+						var date = +echarts.number.parseDate('2017-02-01');
+						var end = +echarts.number.parseDate('2017-03-01');
+						var dayTime = 3600 * 24 * 1000;
+						var data = [];
+						for (var time = date; time < end; time += dayTime) {
+							data.push([
+								echarts.format.formatTime('yyyy-MM-dd', time),
+								Math.floor(Math.random() * 10000)
+							]);
+						}
+						return data;
+					}
+
+					function getPieSeries(scatterData, chart) {
+						return echarts.util.map(scatterData, function (item, index) {
+							var center = chart.convertToPixel('calendar', item);
+							return {
+								id: index + 'pie',
+								type: 'pie',
+								center: center,
+								label: {
+									normal: {
+										formatter: '{c}',
+										position: 'inside'
+									}
+								},
+								radius: pieRadius,
+								data: [
+									{name: 'samochody', value: Math.round(Math.random() * 24)},
+									{name: 'rowery', value: Math.round(Math.random() * 24)},
+									{name: 'piesi', value: Math.round(Math.random() * 24)}
+								]
+							};
+						});
+					}
+
+					function getPieSeriesUpdate(scatterData, chart) {
+						return echarts.util.map(scatterData, function (item, index) {
+							var center = chart.convertToPixel('calendar', item);
+							return {
+								id: index + 'pie',
+								center: center
+							};
+						});
+					}
+
+					var scatterData = getVirtulData();
+
+					option = {
+						tooltip : {},
+						legend: {
+							data: ['samochody', 'rowery', 'piesi'],
+							bottom: 20
+						},
+						calendar: {
+							top: 'middle',
+							left: 'center',
+							orient: 'vertical',
+							cellSize: cellSize,
+							yearLabel: {
+								show: false,
+								textStyle: {
+									fontSize: 30
+								}
+							},
+							dayLabel: {
+								margin: 20,
+								firstDay: 1,
+								nameMap: ['nd', 'pn', 'wt', 'śr', 'cz', 'pt', 'sb']
+							},
+							monthLabel: {
+								show: false
+							},
+							range: ['2017-02']
+						},
+						series: [{
+							id: 'label',
+							type: 'scatter',
+							coordinateSystem: 'calendar',
+							symbolSize: 1,
+							label: {
+								normal: {
+									show: true,
+									formatter: function (params) {
+										return echarts.format.formatTime('dd', params.value[0]);
+									},
+									offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 10],
+									textStyle: {
+										color: '#000',
+										fontSize: 14
+									}
+								}
+							},
+							data: scatterData
+						}]
+					};
+
+					var pieInitialized;
+					setTimeout(function () {
+						pieInitialized = true;
+						myChart.setOption({
+							series: getPieSeries(scatterData, myChart)
+						});
+					}, 10);
+
+					app.onresize = function () {
+						if (pieInitialized) {
+							myChart.setOption({
+								series: getPieSeriesUpdate(scatterData, myChart)
+							});
+						}
+						myChart.resize();
+					};
+					
+					if (option && typeof option === "object") {
+						myChart.setOption(option, true);
+					}
+				}
 			</script> 
 		<div class="row">
 		  <div class="col-sm-6" id="barchart" style="width: 100%; min-height: 400px">
@@ -179,133 +309,8 @@
 		</div>
 		
       </div>
-		</div>
+	</div>
 		
-	<script type="text/javascript">
-		var dom = document.getElementById("piecalendar");
-		var myChart = echarts.init(dom);
-		var app = {};
-		option = null;
-		var cellSize = [60, 60];
-		var pieRadius = 25;
-
-		function getVirtulData() {
-			var date = +echarts.number.parseDate('2017-02-01');
-			var end = +echarts.number.parseDate('2017-03-01');
-			var dayTime = 3600 * 24 * 1000;
-			var data = [];
-			for (var time = date; time < end; time += dayTime) {
-				data.push([
-					echarts.format.formatTime('yyyy-MM-dd', time),
-					Math.floor(Math.random() * 10000)
-				]);
-			}
-			return data;
-		}
-
-		function getPieSeries(scatterData, chart) {
-			return echarts.util.map(scatterData, function (item, index) {
-				var center = chart.convertToPixel('calendar', item);
-				return {
-					id: index + 'pie',
-					type: 'pie',
-					center: center,
-					label: {
-						normal: {
-							formatter: '{c}',
-							position: 'inside'
-						}
-					},
-					radius: pieRadius,
-					data: [
-						{name: 'samochody', value: Math.round(Math.random() * 24)},
-						{name: 'rowery', value: Math.round(Math.random() * 24)},
-						{name: 'piesi', value: Math.round(Math.random() * 24)}
-					]
-				};
-			});
-		}
-
-		function getPieSeriesUpdate(scatterData, chart) {
-			return echarts.util.map(scatterData, function (item, index) {
-				var center = chart.convertToPixel('calendar', item);
-				return {
-					id: index + 'pie',
-					center: center
-				};
-			});
-		}
-
-		var scatterData = getVirtulData();
-
-		option = {
-			tooltip : {},
-			legend: {
-				data: ['samochody', 'rowery', 'piesi'],
-				bottom: 20
-			},
-			calendar: {
-				top: 'middle',
-				left: 'center',
-				orient: 'vertical',
-				cellSize: cellSize,
-				yearLabel: {
-					show: false,
-					textStyle: {
-						fontSize: 30
-					}
-				},
-				dayLabel: {
-					margin: 20,
-					firstDay: 1,
-					nameMap: ['nd', 'pn', 'wt', 'śr', 'cz', 'pt', 'sb']
-				},
-				monthLabel: {
-					show: false
-				},
-				range: ['2017-02']
-			},
-			series: [{
-				id: 'label',
-				type: 'scatter',
-				coordinateSystem: 'calendar',
-				symbolSize: 1,
-				label: {
-					normal: {
-						show: true,
-						formatter: function (params) {
-							return echarts.format.formatTime('dd', params.value[0]);
-						},
-						offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 10],
-						textStyle: {
-							color: '#000',
-							fontSize: 14
-						}
-					}
-				},
-				data: scatterData
-			}]
-		};
-
-		var pieInitialized;
-		setTimeout(function () {
-			pieInitialized = true;
-			myChart.setOption({
-				series: getPieSeries(scatterData, myChart)
-			});
-		}, 10);
-
-		app.onresize = function () {
-			if (pieInitialized) {
-				myChart.setOption({
-					series: getPieSeriesUpdate(scatterData, myChart)
-				});
-			}
-		};;
-		if (option && typeof option === "object") {
-			myChart.setOption(option, true);
-		}
-       </script>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>

@@ -115,7 +115,7 @@
                 </ul>
 			  </li>
 	          <li>
-				<a href="poi.html" class="active"><span class="fa fa-sticky-note mr-3"></span>POI</a>
+				<a href="poi.html?id=1&name=Park%20Brzeziny" class="active"><span class="fa fa-sticky-note mr-3"></span>POI</a>
 	          </li>
 			  <li>
 	            <a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
@@ -136,9 +136,18 @@
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Park Brzeziny</h2>
-        <div id="curve_chart" style="width: 900px; height: 500px"></div> 
+        <h2 class="mb-4" id="name"></h2>
 		
+        <div id="curve_chart" style="width: 900px; height: 500px"></div> 
+			<script>
+				const queryString = window.location.search;
+
+				const urlParams = new URLSearchParams(queryString);
+				const id = urlParams.get('id')
+				const name = urlParams.get('name')
+			
+				document.getElementById("name").innerHTML = name;	
+			</script> 
 		<div id="piechart" style="width: 900px; height: 500px"></div> 
 		
       </div>

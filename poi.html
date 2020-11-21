@@ -94,9 +94,82 @@
 
 				const urlParams = new URLSearchParams(queryString);
 				const id = urlParams.get('id')
-				const name = urlParams.get('name')
+				
 			
-				document.getElementById("name").innerHTML = name;	
+				document.getElementById("name").innerHTML = name;
+				
+				var xhr = new XMLHttpRequest();
+				var url = "http://ec2-18-188-99-138.us-east-2.compute.amazonaws.com:8988/poi_info?data=%7B%22poi_id%22:%22park_regana%22%7D";
+				xhr.open("GET", url, true);
+				
+				xhr.send();
+				
+				xhr.onload = function() {
+					if (xhr.status != 200) { // analyze HTTP status of the response
+						name = "Nieznany POI";
+						alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+					} else { // show the result
+						answer = JSON.parse(xhr.responseText);
+						console.log(JSON.parse(xhr.responseText))
+						name = answer.poi_name;
+						barChartBus(answer.bus_occupancy)
+					}
+					document.getElementById("name").innerHTML = name;
+					
+				};
+				
+				
+
+        // specify chart configuration item and data
+				
+				function timeConverter(UNIX_timestamp){
+					  var a = new Date(UNIX_timestamp * 1000);
+					  var year = a.getFullYear();
+					  var month = a.getMonth();
+					  var date = a.getDate();
+					  var hour = a.getHours();
+					  var min = a.getMinutes();
+					  var sec = a.getSeconds();
+					  var time = year + '/' + month + '/' + date + ' ' + hour + ':' + min;
+					  return time;
+				}
+				
+				function barChartBus(data) {
+				
+					var myChart = echarts.init(document.getElementById('barchart'));
+					
+					console.log(data)
+					data_list = [['date', 'value']]
+					for (x of data) {
+						data_list = data_list.concat([[x.dt, x.val]])
+					}
+					console.log(data_list)
+					
+					var option = {
+						legend: {},
+						tooltip: {},
+						dataset: {
+							source: data_list
+						},
+						xAxis: {type: 'category'},
+						yAxis: {},
+						// Declare several bar series, each will be mapped
+						// to a column of dataset.source by default.
+						series: [
+							{type: 'bar'},
+							{type: 'bar'},
+							{type: 'bar'}
+						]
+					};
+
+
+					// use configuration item and data specified to show chart
+					myChart.setOption(option);
+					
+					window.onresize = function() {
+						myChart.resize();
+					};
+				}
 			</script> 
 		<div class="row">
 		  <div class="col-sm-6" id="barchart" style="width: 100%; min-height: 400px">
@@ -108,43 +181,6 @@
       </div>
 		</div>
 		
-    <script type="text/javascript">
-        // based on prepared DOM, initialize echarts instance
-        var myChart = echarts.init(document.getElementById('barchart'));
-
-        // specify chart configuration item and data
-        var option = {
-			legend: {},
-			tooltip: {},
-			dataset: {
-			source: [
-					['product', '2015', '2016', '2017'],
-					['Matcha Latte', 43.3, 85.8, 93.7],
-					['Milk Tea', 83.1, 73.4, 55.1],
-					['Cheese Cocoa', 86.4, 65.2, 82.5],
-					['Walnut Brownie', 72.4, 53.9, 39.1]
-				]
-			},
-			xAxis: {type: 'category'},
-			yAxis: {},
-			// Declare several bar series, each will be mapped
-			// to a column of dataset.source by default.
-			series: [
-				{type: 'bar'},
-				{type: 'bar'},
-				{type: 'bar'}
-			]
-		};
-
-
-        // use configuration item and data specified to show chart
-        myChart.setOption(option);
-		
-		window.onresize = function() {
-			myChart.resize();
-		};
-    </script>
-
 	<script type="text/javascript">
 		var dom = document.getElementById("piecalendar");
 		var myChart = echarts.init(dom);

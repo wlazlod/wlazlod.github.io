@@ -97,7 +97,7 @@
 				document.getElementById('upload_res').innerHTML = "<br>Wykryte obiekty:<li>Piesi: " + people.toString() + "</li><li>Samochody: " + cars.toString() + "</li><li>Rowery: " + bikes.toString()+ "</li><li>Psy: " + dogs.toString() + "</li>";
  
 				img_src = "https://vj8jq3kuo9.execute-api.us-east-2.amazonaws.com/prod/" + resp.marked_image;
-				document.getElementById('img_div').innerHTML = '<img src="' + img_src + '" />';
+				document.getElementById('img_div').innerHTML = '<img src="' + img_src + '"class="img-fluid" />';
 			}
 			</script>
 				
@@ -213,7 +213,7 @@
 				<br>
 			</div>
 
-			<div id="img_div" class="col-sm-12 d-flex justify-content-center"></div>
+			<div id="img_div" class="col-sm-6 offset-sm-3 d-flex justify-content-center"></div>
 			<div id="upload_res" class="col-sm-6 offset-sm-3 text-left"></div>
 
 		  </div>

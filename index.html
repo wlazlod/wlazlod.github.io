@@ -10,105 +10,115 @@
 		<link rel="stylesheet" href="css/style.css">
 		
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-		<script src="js/heatmap.min.js"></script>
-		
-		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-		<script src="js/leaflet-heatmap.js"></script>
-		
-		
 	
   </head>
   <body>
 		
-		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="custom-menu">
-					<button type="button" id="sidebarCollapse" class="btn btn-primary">
-	          <i class="fa fa-bars"></i>
-	          <span class="sr-only">Toggle Menu</span>
-	        </button>
-        </div>
-				<div class="p-4">
-		  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
-	        <ul class="list-unstyled components mb-5">
-	          <li class = "active">
-	            <a href="index.html"><span class="fa fa-map-o mr-3"></span> Mapa Mobilności</a>
-	          </li>
-			  <li>
-                <a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-clone mr-3"></span> Miejsca</a>
-                <ul class="collapse list-unstyled" id="groupSubmenu">
-                    <li>
-						<a href="#buildingsSubSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Budynki</a>
-						<ul class="collapse list-unstyled" id="buildingsSubSubmenu">
-							<li>
-								<a href="groups_template.html">Centra handlowe</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Kościoły</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Szkoły</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Urzędy</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Zakłady Pracy</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-                        <a href="groups_template.html">Parki</a>
-                    </li>
-					<li>
-                        <a href="groups_template.html">Przystanki</a>
-                    </li>
-                    <li>
-                        <a href="groups_template.html">Ulice</a>
-                    </li>
-                    <li>
-                        <a href="groups_template.html">Ścieżki rowerowe</a>
-                    </li>
-                </ul>
-			  </li>
-	          <li>
-				<a href="poi.html?id=Park%20Brzeziny" class="active"><span class="fa fa-map-marker mr-3"></span>POI</a>
-	          </li>
-			  <li>
-	            <a href="add.html"><span class="fa fa-camera-retro mr-3"></span>Rozpoznawanie obiektów</a>
-	          </li>
-			  <li>
-	            <a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
-	          </li>
-	          <li>
+	<div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar">
+		<div class="custom-menu">
+			<button type="button" id="sidebarCollapse" class="btn btn-primary">
+				<i class="fa fa-bars"></i>
+				<span class="sr-only">Toggle Menu</span>
+			</button>
+		</div>
+		<div class="p-4">
+	  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
+			<ul class="list-unstyled components mb-5">
+			<li class = "active">
+				<a href="index.html"><span class="fa fa-map-o mr-3"></span> Mapa Mobilności</a>
+			</li>
+			<li>
+				<a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-clone mr-3" ></span> Kategorie </a>
+				<ul class="collapse list-unstyled" id="groupSubmenu">
+				<li>
+					<a href="#buildingsSubSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-building"></i> Budynki</a>
+					<ul class="collapse list-unstyled" id="buildingsSubSubmenu">
+						<li> <a href="groups_template.html"><i class="fa fa-shopping-cart"></i> Centra handlowe</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-plus"></i> Kościoły</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-graduation-cap"></i> Szkoły</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-university"></i> Urzędy</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-industry"></i> Zakłady Pracy</a> </li>
+					</ul>
+				</li>
+				<li> <a href="groups_template.html"><i class="fa fa-tree"></i> Parki</a> </li>                    
+				<li> <a href="groups_template.html?group=bus_stops"><i class="fa fa-bus"></i> Przystanki</a> </li>
+				<li> <a href="groups_template.html"><i class="fa fa-road"></i> Ulice</a> </li>
+				<li> <a href="groups_template.html"><i class="fa fa-bicycle"></i> Ścieżki rowerowe</a> </li>
+					
+				</ul>
+			</li>
+			<li>
+				<a href="#poiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-map-marker mr-3"></span> Punkty</a>
+				<ul class="collapse list-unstyled" id="poiSubmenu">
+				<li> <a href="poi.html?id=gen_okulickiego_1"><i class="fa fa-bus"></i> Generała Okulickiego 1</a> </li>
+				<li> <a href="poi.html?id=gen_okulickiego_2"><i class="fa fa-bus"></i> Generała Okulickiego 2</a> </li>
+				<li> <a href="poi.html?id=jana_pawla_2"><i class="fa fa-bus"></i> Jana Pawła 2</a> </li>
+				<li> <a href="poi.html?id=kino_lot"><i class="fa fa-bus"></i> Kino Lot</a> </li>
+				<li> <a href="poi.html?id=klonowa_kosciol"><i class="fa fa-bus"></i> Klonowa - Kościół</a> </li>
+				<li> <a href="poi.html?id=kosynierow_1"><i class="fa fa-bus"></i> Kosynierów 1</a> </li>
+				<li> <a href="poi.html?id=kosynierow_2"><i class="fa fa-bus"></i> Kosynierów 2</a> </li>
+				<li> <a href="poi.html?id=kusocinskiego"><i class="fa fa-bus"></i> Kusocińskiego</a> </li>
+				<li> <a href="poi.html?id=lotnikow_polskich_dzialki"><i class="fa fa-bus"></i> Lotników Polskich - Działki</a> </li>
+				<li> <a href="poi.html?id=lotnikow_polskich_stacja_paliw"><i class="fa fa-bus"></i> Lotników Polskich - Stacja Paliw</a> </li>
+				<li> <a href="poi.html?id=lotnikow_polskich_szpital"><i class="fa fa-bus"></i> Lotników Polskich - Szpital</a> </li>
+				<li> <a href="poi.html?id=nadlesnictwo_swidnik"><i class="fa fa-bus"></i> Nadleśnictwo Świdnik</a> </li>
+				<li> <a href="poi.html?id=niepodleglosci_1"><i class="fa fa-bus"></i> Niepodległości 1</a> </li>
+				<li> <a href="poi.html?id=niepodleglosci_szpital"><i class="fa fa-bus"></i> Niepodległości 2</a> </li>
+				<li> <a href="poi.html?id=raclawicka_1"><i class="fa fa-bus"></i> Racławicka 1</a> </li>
+				<li> <a href="poi.html?id=raclawicka_2"><i class="fa fa-bus"></i> Racławicka 2</a> </li>
+				<li> <a href="poi.html?id=swidnik_helikopter"><i class="fa fa-bus"></i> Świdnik Helikopter</a> </li>
+				<li> <a href="poi.html?id=swidnik_stadion"><i class="fa fa-bus"></i> Świdnik Stadion</a> </li>
+				<li> <a href="poi.html?id=wyszynskiego_cmentarz"><i class="fa fa-bus"></i> Wyszyńskiego 1</a> </li>
+				<li> <a href="poi.html?id=wyszynskiego_wiejska"><i class="fa fa-bus"></i> Wyszyńskiego 2</a> </li>
+				<li> <a href="poi.html?id=zwirki_i_wigury"><i class="fa fa-bus"></i> Żwirki i Wigury</a> </li>
+
+				</ul>
+			</li>
+			<li>
+				<a href="add.html"><span class="fa fa-camera-retro mr-3"></span>Analiza obrazu</a>
+			</li>
+			<li>
+				<a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
+			</li>
+			<li>
 				<a href="contact.html"><span class="fa fa-paper-plane mr-3"></span>Kontakt</a>
-	          </li>
-	        </ul>
+			</li>
+			</ul>
+			
+			<div class="footer">
+				<p> Copyright by AiRonmen &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved </p>
+			
+			</div>
 
-	        <div class="footer">
-	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright by AiRonmen &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	        </div>
+		</div>
+		</nav>
 
-	      </div>
-    	</nav>
-
-        <!-- Page Content  -->
-      <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Mapa mobilności</h2>
-        <div id="mapid" style="width:100%; height: 90%;"></div>
-		<script>
+		<!-- Page Content  -->
+		<div id="content" class="p-4 p-md-5 pt-5">
+			<h2 class="mb-4">Mapa mobilności</h2>
+			<div id="mapid" style="width:100%; height: 90%;"></div>
 		
+		</div>
+	</div>
 
-			
-			
-			var satelite = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+	<script src="js/heatmap.min.js"></script>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+	<script src="js/leaflet-heatmap.js"></script>
+
+	<script>
+		var satelite = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 				subdomains: ['a','b','c']
-			})
+		})
 			
-				streets  =  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		streets  =  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 				maxZoom: 18,
 				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
 					'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -116,9 +126,9 @@
 				id: 'mapbox/streets-v11',
 				tileSize: 512,
 				zoomOffset: -1
-			})
+		})
 		
-			var photoIcon = L.icon({
+		var photoIcon = L.icon({
 				iconUrl: 'images/photo_icon.png',
 
 				iconSize:     [41, 60], // size of the icon
@@ -126,7 +136,7 @@
 				popupAnchor:  [-3, -60] // point from which the popup should open relative to the iconAnchor
 			});
 			
-			var busIcon = L.icon({
+		var busIcon = L.icon({
 				iconUrl: 'images/bus_icon.png',
 
 				iconSize:     [41, 60], // size of the icon
@@ -136,163 +146,151 @@
 			
 			/* Data acquisition would be done by API */
 			
-			var cameras = L.layerGroup([L.marker([51.225755, 22.697679], {icon: photoIcon}),
-										L.marker([51.225421, 22.695608], {icon: photoIcon}),
-										L.marker([51.223956, 22.693806], {icon: photoIcon}),
-										L.marker([51.223157, 22.70034], {icon: photoIcon}),
-										L.marker([51.223519, 22.692829], {icon: photoIcon}),
-										L.marker([51.223318, 22.69417], {icon: photoIcon}),
-										L.marker([51.223439, 22.694986], {icon: photoIcon}),
-										L.marker([51.222908, 22.694728], {icon: photoIcon}),
-										L.marker([51.222506, 22.695994], {icon: photoIcon}),
-										L.marker([51.22309, 22.698065], {icon: photoIcon}),
-										L.marker([51.222304, 22.697797], {icon: photoIcon}),
-										L.marker([51.222532, 22.700093], {icon: photoIcon}),
-										L.marker([51.222358, 22.701284], {icon: photoIcon}),
-										L.marker([51.221579, 22.695372], {icon: photoIcon}),
-										L.marker([51.221082, 22.693119], {icon: photoIcon}),
-										L.marker([51.220854, 22.694632], {icon: photoIcon}),
-										L.marker([51.220659, 22.69343], {icon: photoIcon}),
-										L.marker([51.219786, 22.693902], {icon: photoIcon}),
-										L.marker([51.220793, 22.697228], {icon: photoIcon}),
-										L.marker([51.220438, 22.697067], {icon: photoIcon}),
-										L.marker([51.220142, 22.69696], {icon: photoIcon}),
-										L.marker([51.219296, 22.681054], {icon: photoIcon}),
-										L.marker([51.219876, 22.700157], {icon: photoIcon}),
-										L.marker([51.2195, 22.701037], {icon: photoIcon}),
-										L.marker([51.219144, 22.70079], {icon: photoIcon}),
-										L.marker([51.21899, 22.701305], {icon: photoIcon}),
-										L.marker([51.219292, 22.699106], {icon: photoIcon}),
-										L.marker([51.218829, 22.696424], {icon: photoIcon}),
-										L.marker([51.218761, 22.69563], {icon: photoIcon}),
-										L.marker([51.218935, 22.693602], {icon: photoIcon}),
-										L.marker([51.218519, 22.693387], {icon: photoIcon}),
-										L.marker([51.218311, 22.699449], {icon: photoIcon}),
-										L.marker([51.218042, 22.700919], {icon: photoIcon}),
-										L.marker([51.217552, 22.703129], {icon: photoIcon}),
-										L.marker([51.215987, 22.698891], {icon: photoIcon}),
-										L.marker([51.217055, 22.69093], {icon: photoIcon}),
-										L.marker([51.214064, 22.698371], {icon: photoIcon}),
-										L.marker([51.213691, 22.702405], {icon: photoIcon}),
-										L.marker([51.214389, 22.686462], {icon: photoIcon}),
-										L.marker([51.213616, 22.687696], {icon: photoIcon}),
-										L.marker([51.212693, 22.688962], {icon: photoIcon}),
-										L.marker([51.213697, 22.689385], {icon: photoIcon}),
-										L.marker([51.213831, 22.688752], {icon: photoIcon}),
-										L.marker([51.209097, 22.682186], {icon: photoIcon}),
-										L.marker([51.20585, 22.694621], {icon: photoIcon}),
-										L.marker([51.218378, 22.709877], {icon: photoIcon}),
-										L.marker([51.21748, 22.713166], {icon: photoIcon}),
-										L.marker([51.217299, 22.712184], {icon: photoIcon}),
-										L.marker([51.215813, 22.708611], {icon: photoIcon}),
-										L.marker([51.214698, 22.708172], {icon: photoIcon}),
-									  ]);
+		var cameras = L.layerGroup([L.marker([51.225755, 22.697679], {icon: photoIcon}),
+									L.marker([51.225421, 22.695608], {icon: photoIcon}),
+									L.marker([51.223956, 22.693806], {icon: photoIcon}),
+									L.marker([51.223157, 22.70034], {icon: photoIcon}),
+									L.marker([51.223519, 22.692829], {icon: photoIcon}),
+									L.marker([51.223318, 22.69417], {icon: photoIcon}),
+									L.marker([51.223439, 22.694986], {icon: photoIcon}),
+									L.marker([51.222908, 22.694728], {icon: photoIcon}),
+									L.marker([51.222506, 22.695994], {icon: photoIcon}),
+									L.marker([51.22309, 22.698065], {icon: photoIcon}),
+									L.marker([51.222304, 22.697797], {icon: photoIcon}),
+									L.marker([51.222532, 22.700093], {icon: photoIcon}),
+									L.marker([51.222358, 22.701284], {icon: photoIcon}),
+									L.marker([51.221579, 22.695372], {icon: photoIcon}),
+									L.marker([51.221082, 22.693119], {icon: photoIcon}),
+									L.marker([51.220854, 22.694632], {icon: photoIcon}),
+									L.marker([51.220659, 22.69343], {icon: photoIcon}),
+									L.marker([51.219786, 22.693902], {icon: photoIcon}),
+									L.marker([51.220793, 22.697228], {icon: photoIcon}),
+									L.marker([51.220438, 22.697067], {icon: photoIcon}),
+									L.marker([51.220142, 22.69696], {icon: photoIcon}),
+									L.marker([51.219296, 22.681054], {icon: photoIcon}),
+									L.marker([51.219876, 22.700157], {icon: photoIcon}),
+									L.marker([51.2195, 22.701037], {icon: photoIcon}),
+									L.marker([51.219144, 22.70079], {icon: photoIcon}),
+									L.marker([51.21899, 22.701305], {icon: photoIcon}),
+									L.marker([51.219292, 22.699106], {icon: photoIcon}),
+									L.marker([51.218829, 22.696424], {icon: photoIcon}),
+									L.marker([51.218761, 22.69563], {icon: photoIcon}),
+									L.marker([51.218935, 22.693602], {icon: photoIcon}),
+									L.marker([51.218519, 22.693387], {icon: photoIcon}),
+									L.marker([51.218311, 22.699449], {icon: photoIcon}),
+									L.marker([51.218042, 22.700919], {icon: photoIcon}),
+									L.marker([51.217552, 22.703129], {icon: photoIcon}),
+									L.marker([51.215987, 22.698891], {icon: photoIcon}),
+									L.marker([51.217055, 22.69093], {icon: photoIcon}),
+									L.marker([51.214064, 22.698371], {icon: photoIcon}),
+									L.marker([51.213691, 22.702405], {icon: photoIcon}),
+									L.marker([51.214389, 22.686462], {icon: photoIcon}),
+									L.marker([51.213616, 22.687696], {icon: photoIcon}),
+									L.marker([51.212693, 22.688962], {icon: photoIcon}),
+									L.marker([51.213697, 22.689385], {icon: photoIcon}),
+									L.marker([51.213831, 22.688752], {icon: photoIcon}),
+									L.marker([51.209097, 22.682186], {icon: photoIcon}),
+									L.marker([51.20585, 22.694621], {icon: photoIcon}),
+									L.marker([51.218378, 22.709877], {icon: photoIcon}),
+									L.marker([51.21748, 22.713166], {icon: photoIcon}),
+									L.marker([51.217299, 22.712184], {icon: photoIcon}),
+									L.marker([51.215813, 22.708611], {icon: photoIcon}),
+									L.marker([51.214698, 22.708172], {icon: photoIcon}),
+								  ]);
 			
-			var busStops = L.layerGroup([
-							L.marker([51.22035535953786,22.709868239733943], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=gen_okulickiego_1">Generała Okulickiego 1</a>'),
-							L.marker([51.22154197462788,22.7024973969268], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=gen_okulickiego_2">Generała Okulickiego 2</a>'),
-							L.marker([51.20919332372916,22.680701741112276], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=jana_pawla_2">Jana Pawła 2</a>'),
-							L.marker([51.22025395952453,22.693025877828166], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kino_lot">Kino Lot</a>'),
-							L.marker([51.21022110707651,22.70468075242529], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=klonowa_kosciol">Klonowa - Kościół</a>'),
-							L.marker([51.219863073457674,22.71091679112294], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kosynierow_1">Kosynierów 1</a>'),
-							L.marker([51.21564282657266,22.708341870598186], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kosynierow_2">Kosynierów 2</a>'),
-							L.marker([51.21128996967309,22.708945294232723], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kusocinskiego">Kusocińskiego</a>'),
-							L.marker([51.20762620999477,22.68036677944468], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=lotnikow_polskich_dzialki">Lotników Polskich - Działki</a>'),
-							L.marker([51.214150244269334,22.687347640608735], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=lotnikow_polskich_stacja_paliw">Lotników Polskich - Stacja Paliw</a>'),
-							L.marker([51.221227501256195,22.693418517291736], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=lotnikow_polskich_szpital">Lotników Polskich - Szpital</a>'),
-							L.marker([51.227113521883254,22.676552787065994], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=nadlesnictwo_swidnik">Nadleśnictwo Świdnik</a>'),
-							L.marker([51.21873685401762,22.707736041179718], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=niepodleglosci_1">Niepodległości 1</a>'),
-							L.marker([51.2209409595468,22.694099691205984], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=niepodleglosci_szpital">Niepodległości 2</a>'),
-							L.marker([51.21530952910244,22.70404532180301], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=raclawicka_1">Racławicka 1</a>'),
-							L.marker([51.215934530899666,22.693788554883067], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=raclawicka_2">Racławicka 2</a>'),
-							L.marker([51.21807828978288,22.69205048319313], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=swidnik_helikopter">Świdnik Helikopter</a>'),
-							L.marker([51.22567808535518,22.6955266257952], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=swidnik_stadion">Świdnik Stadion</a>'),
-							L.marker([51.199721515777895,22.692915656706887], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=wyszynskiego_cmentarz">Wyszyńskiego 1</a>'),
-							L.marker([51.2045999287828,22.694593718845578], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=wyszynskiego_wiejska">Wyszyńskiego 2</a>'),
-							L.marker([51.225180956057486,22.68862493389834], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=zwirki_i_wigury">Żwirki i Wigury</a>')
-						   ]);
+		var busStops = L.layerGroup([
+						L.marker([51.22035535953786,22.709868239733943], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=gen_okulickiego_1">Generała Okulickiego 1</a>'),
+						L.marker([51.22154197462788,22.7024973969268], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=gen_okulickiego_2">Generała Okulickiego 2</a>'),
+						L.marker([51.20919332372916,22.680701741112276], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=jana_pawla_2">Jana Pawła 2</a>'),
+						L.marker([51.22025395952453,22.693025877828166], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kino_lot">Kino Lot</a>'),
+						L.marker([51.21022110707651,22.70468075242529], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=klonowa_kosciol">Klonowa - Kościół</a>'),
+						L.marker([51.219863073457674,22.71091679112294], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kosynierow_1">Kosynierów 1</a>'),
+						L.marker([51.21564282657266,22.708341870598186], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kosynierow_2">Kosynierów 2</a>'),
+						L.marker([51.21128996967309,22.708945294232723], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=kusocinskiego">Kusocińskiego</a>'),
+						L.marker([51.20762620999477,22.68036677944468], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=lotnikow_polskich_dzialki">Lotników Polskich - Działki</a>'),
+						L.marker([51.214150244269334,22.687347640608735], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=lotnikow_polskich_stacja_paliw">Lotników Polskich - Stacja Paliw</a>'),
+						L.marker([51.221227501256195,22.693418517291736], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=lotnikow_polskich_szpital">Lotników Polskich - Szpital</a>'),
+						L.marker([51.227113521883254,22.676552787065994], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=nadlesnictwo_swidnik">Nadleśnictwo Świdnik</a>'),
+						L.marker([51.21873685401762,22.707736041179718], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=niepodleglosci_1">Niepodległości 1</a>'),
+						L.marker([51.2209409595468,22.694099691205984], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=niepodleglosci_szpital">Niepodległości 2</a>'),
+						L.marker([51.21530952910244,22.70404532180301], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=raclawicka_1">Racławicka 1</a>'),
+						L.marker([51.215934530899666,22.693788554883067], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=raclawicka_2">Racławicka 2</a>'),
+						L.marker([51.21807828978288,22.69205048319313], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=swidnik_helikopter">Świdnik Helikopter</a>'),
+						L.marker([51.22567808535518,22.6955266257952], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=swidnik_stadion">Świdnik Stadion</a>'),
+						L.marker([51.199721515777895,22.692915656706887], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=wyszynskiego_cmentarz">Wyszyńskiego 1</a>'),
+						L.marker([51.2045999287828,22.694593718845578], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=wyszynskiego_wiejska">Wyszyńskiego 2</a>'),
+						L.marker([51.225180956057486,22.68862493389834], {icon: busIcon}).bindPopup('Przystanek <a href = "poi.html?id=zwirki_i_wigury">Żwirki i Wigury</a>')
+					   ]);
 			
-			var testData = {
-							max: 8,
-							data: [ {lat:51.22035535953786, lng:22.709868239733943, count: 7},
-									{lat:51.22154197462788, lng:22.7024973969268, count: 7},
-									{lat:51.20919332372916, lng:22.680701741112276, count: 7},
-									{lat:51.22025395952453, lng:22.693025877828166, count: 7},
-									{lat:51.21022110707651, lng:22.70468075242529, count: 7},
-									{lat:51.219863073457674, lng:22.71091679112294, count: 7},
-									{lat:51.21564282657266, lng:22.708341870598186, count: 7},
-									{lat:51.21128996967309, lng:22.708945294232723, count: 7},
-									{lat:51.20762620999477, lng:22.68036677944468, count: 7},
-									{lat:51.214150244269334, lng:22.687347640608735, count: 7},
-									{lat:51.221227501256195, lng:22.693418517291736, count: 7},
-									{lat:51.227113521883254, lng:22.676552787065994, count: 7},
-									{lat:51.21873685401762, lng:22.707736041179718, count: 7},
-									{lat:51.2209409595468, lng:22.694099691205984, count: 7},
-									{lat:51.21530952910244, lng:22.70404532180301, count: 7},
-									{lat:51.215934530899666, lng:22.693788554883067, count: 7},
-									{lat:51.21807828978288, lng:22.69205048319313, count: 7},
-									{lat:51.22567808535518, lng:22.6955266257952, count: 8},
-									{lat:51.199721515777895, lng:22.692915656706887, count: 7},
-									{lat:51.2045999287828, lng:22.694593718845578, count: 7},
-									{lat:51.225180956057486, lng:22.68862493389834, count: 7}
-								 ]
-							};
+		var testData = {
+						max: 8,
+						data: [ {lat:51.22035535953786, lng:22.709868239733943, count: 7},
+								{lat:51.22154197462788, lng:22.7024973969268, count: 7},
+								{lat:51.20919332372916, lng:22.680701741112276, count: 7},
+								{lat:51.22025395952453, lng:22.693025877828166, count: 7},
+								{lat:51.21022110707651, lng:22.70468075242529, count: 7},
+								{lat:51.219863073457674, lng:22.71091679112294, count: 7},
+								{lat:51.21564282657266, lng:22.708341870598186, count: 7},
+								{lat:51.21128996967309, lng:22.708945294232723, count: 7},
+								{lat:51.20762620999477, lng:22.68036677944468, count: 7},
+								{lat:51.214150244269334, lng:22.687347640608735, count: 7},
+								{lat:51.221227501256195, lng:22.693418517291736, count: 7},
+								{lat:51.227113521883254, lng:22.676552787065994, count: 7},
+								{lat:51.21873685401762, lng:22.707736041179718, count: 7},
+								{lat:51.2209409595468, lng:22.694099691205984, count: 7},
+								{lat:51.21530952910244, lng:22.70404532180301, count: 7},
+								{lat:51.215934530899666, lng:22.693788554883067, count: 7},
+								{lat:51.21807828978288, lng:22.69205048319313, count: 7},
+								{lat:51.22567808535518, lng:22.6955266257952, count: 8},
+								{lat:51.199721515777895, lng:22.692915656706887, count: 7},
+								{lat:51.2045999287828, lng:22.694593718845578, count: 7},
+								{lat:51.225180956057486, lng:22.68862493389834, count: 7}
+							 ]
+						};
 							
-			var cfg = {
-				"radius": 0.004,
-				"maxOpacity": .5,
-				"scaleRadius": true,
-				"useLocalExtrema": false,
-				latField: 'lat',
-				lngField: 'lng',
-				valueField: 'count'
-			};
+		var cfg = {
+			"radius": 0.004,
+			"maxOpacity": .5,
+			"scaleRadius": true,
+			"useLocalExtrema": false,
+			latField: 'lat',
+			lngField: 'lng',
+			valueField: 'count'
+		};
 			
-			var distances = new HeatmapOverlay(cfg);
+		var distances = new HeatmapOverlay(cfg);
 			distances.setData(testData);
 			
-			var mymap = L.map('mapid', {
+		var mymap = L.map('mapid', {
 							center: [51.219572, 22.69972],
 							zoom: 13,
 							layers: [streets, cameras, busStops]
-						});
+					});
 				
-			var baseMaps = {
-				"OpenStreetMap": satelite,
-				"MapBox": streets
-			};
+		var baseMaps = {"OpenStreetMap": satelite,
+						"MapBox": streets
+					   };
 
-			var overlayMaps = {
-				"Kamery": cameras,
-				"Przystanki autobusowe": busStops,
-				"Odległości od przystanku": distances
-			};
+		var overlayMaps = {"Kamery": cameras,
+						   "Przystanki autobusowe": busStops,
+						   "Odległości od przystanku": distances
+						  };
 			
-			L.control.layers(baseMaps, overlayMaps).addTo(mymap);
+		L.control.layers(baseMaps, overlayMaps).addTo(mymap);
 			
 			
 
-			var popup = L.popup();
+		var popup = L.popup();
 
-			function onMapClick(e) {
-				popup
-				.setLatLng(e.latlng)
-				.setContent("You clicked the map at " + e.latlng.toString())
-				.openOn(mymap);
-			}
-			
-			
-
+		function onMapClick(e) {
+			popup
+			.setLatLng(e.latlng)
+			.setContent("Współrzędne punktu: " + e.latlng.toString())
+			.openOn(mymap);
+		}
 		mymap.on('click', onMapClick);
 
-		</script>
-      </div>
-		</div>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+	</script>
 	
   </body>
 </html>

@@ -107,83 +107,89 @@
   </head>
   <body>
 		
-		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="custom-menu">
-					<button type="button" id="sidebarCollapse" class="btn btn-primary">
-	          <i class="fa fa-bars"></i>
-	          <span class="sr-only">Toggle Menu</span>
-	        </button>
-        </div>
-				<div class="p-4">
-		  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
-	        <ul class="list-unstyled components mb-5">
-	          <li>
-	            <a href="index.html"><span class="fa fa-map-o mr-3"></span> Mapa Mobilności</a>
-	          </li>
-			  <li>
-                <a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-clone mr-3"></span> Grupy POI</a>
-                <ul class="collapse list-unstyled" id="groupSubmenu">
-                    <li>
-						<a href="#buildingsSubSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Budynki</a>
-						<ul class="collapse list-unstyled" id="buildingsSubSubmenu">
-							<li>
-								<a href="groups_template.html">Centra handlowe</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Kościoły</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Szkoły</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Urzędy</a>
-							</li>
-							<li>
-								<a href="groups_template.html">Zakłady Pracy</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-                        <a href="groups_template.html">Parki</a>
-                    </li>
-					<li>
-                        <a href="groups_template.html">Przystanki</a>
-                    </li>
-                    <li>
-                        <a href="groups_template.html">Ulice</a>
-                    </li>
-                    <li>
-                        <a href="groups_template.html">Ścieżki rowerowe</a>
-                    </li>
-                </ul>
-			  </li>
-	          <li>
-				<a href="poi.html?id=1&name=Park%20Brzeziny" class="active"><span class="fa fa-map-marker mr-3"></span>POI</a>
-	          </li>
-			  <li class="active">
-	            <a href="add.html"><span class="fa fa-camera-retro mr-3"></span>Rozpoznawanie obiektów</a>
-	          </li>
-			  <li>
-	            <a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
-	          </li>
-	          <li>
+	<div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar">
+		<div class="custom-menu">
+			<button type="button" id="sidebarCollapse" class="btn btn-primary">
+				<i class="fa fa-bars"></i>
+				<span class="sr-only">Toggle Menu</span>
+			</button>
+		</div>
+		<div class="p-4">
+	  		<h1><a href="index.html" class="logo">Świdnik <span>Wspomaganie mobilności</span></a></h1>
+			<ul class="list-unstyled components mb-5">
+			<li>
+				<a href="index.html"><span class="fa fa-map-o mr-3"></span> Mapa Mobilności</a>
+			</li>
+			<li>
+				<a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-clone mr-3" ></span> Kategorie </a>
+				<ul class="collapse list-unstyled" id="groupSubmenu">
+				<li>
+					<a href="#buildingsSubSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-building"></i> Budynki</a>
+					<ul class="collapse list-unstyled" id="buildingsSubSubmenu">
+						<li> <a href="groups_template.html"><i class="fa fa-shopping-cart"></i> Centra handlowe</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-plus"></i> Kościoły</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-graduation-cap"></i> Szkoły</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-university"></i> Urzędy</a> </li>
+						<li> <a href="groups_template.html"><i class="fa fa-industry"></i> Zakłady Pracy</a> </li>
+					</ul>
+				</li>
+				<li> <a href="groups_template.html"><i class="fa fa-tree"></i> Parki</a> </li>                    
+				<li> <a href="groups_template.html?group=bus_stops"><i class="fa fa-bus"></i> Przystanki</a> </li>
+				<li> <a href="groups_template.html"><i class="fa fa-road"></i> Ulice</a> </li>
+				<li> <a href="groups_template.html"><i class="fa fa-bicycle"></i> Ścieżki rowerowe</a> </li>
+					
+				</ul>
+			</li>
+			<li>
+				<a href="#poiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-map-marker mr-3"></span> Punkty</a>
+				<ul class="collapse list-unstyled" id="poiSubmenu">
+				<li> <a href="poi.html?id=gen_okulickiego_1"><i class="fa fa-bus"></i> Generała Okulickiego 1</a> </li>
+				<li> <a href="poi.html?id=gen_okulickiego_2"><i class="fa fa-bus"></i> Generała Okulickiego 2</a> </li>
+				<li> <a href="poi.html?id=jana_pawla_2"><i class="fa fa-bus"></i> Jana Pawła 2</a> </li>
+				<li> <a href="poi.html?id=kino_lot"><i class="fa fa-bus"></i> Kino Lot</a> </li>
+				<li> <a href="poi.html?id=klonowa_kosciol"><i class="fa fa-bus"></i> Klonowa - Kościół</a> </li>
+				<li> <a href="poi.html?id=kosynierow_1"><i class="fa fa-bus"></i> Kosynierów 1</a> </li>
+				<li> <a href="poi.html?id=kosynierow_2"><i class="fa fa-bus"></i> Kosynierów 2</a> </li>
+				<li> <a href="poi.html?id=kusocinskiego"><i class="fa fa-bus"></i> Kusocińskiego</a> </li>
+				<li> <a href="poi.html?id=lotnikow_polskich_dzialki"><i class="fa fa-bus"></i> Lotników Polskich - Działki</a> </li>
+				<li> <a href="poi.html?id=lotnikow_polskich_stacja_paliw"><i class="fa fa-bus"></i> Lotników Polskich - Stacja Paliw</a> </li>
+				<li> <a href="poi.html?id=lotnikow_polskich_szpital"><i class="fa fa-bus"></i> Lotników Polskich - Szpital</a> </li>
+				<li> <a href="poi.html?id=nadlesnictwo_swidnik"><i class="fa fa-bus"></i> Nadleśnictwo Świdnik</a> </li>
+				<li> <a href="poi.html?id=niepodleglosci_1"><i class="fa fa-bus"></i> Niepodległości 1</a> </li>
+				<li> <a href="poi.html?id=niepodleglosci_szpital"><i class="fa fa-bus"></i> Niepodległości 2</a> </li>
+				<li> <a href="poi.html?id=raclawicka_1"><i class="fa fa-bus"></i> Racławicka 1</a> </li>
+				<li> <a href="poi.html?id=raclawicka_2"><i class="fa fa-bus"></i> Racławicka 2</a> </li>
+				<li> <a href="poi.html?id=swidnik_helikopter"><i class="fa fa-bus"></i> Świdnik Helikopter</a> </li>
+				<li> <a href="poi.html?id=swidnik_stadion"><i class="fa fa-bus"></i> Świdnik Stadion</a> </li>
+				<li> <a href="poi.html?id=wyszynskiego_cmentarz"><i class="fa fa-bus"></i> Wyszyńskiego 1</a> </li>
+				<li> <a href="poi.html?id=wyszynskiego_wiejska"><i class="fa fa-bus"></i> Wyszyńskiego 2</a> </li>
+				<li> <a href="poi.html?id=zwirki_i_wigury"><i class="fa fa-bus"></i> Żwirki i Wigury</a> </li>
+
+				</ul>
+			</li>
+			<li class = "active">
+				<a href="add.html"><span class="fa fa-camera-retro mr-3"></span>Analiza obrazu</a>
+			</li>
+			<li>
+				<a href="about.html"><span class="fa fa-user mr-3"></span>O projekcie</a>
+			</li>
+			<li>
 				<a href="contact.html"><span class="fa fa-paper-plane mr-3"></span>Kontakt</a>
-	          </li>
-	        </ul>
+			</li>
+			</ul>
+			
+			<div class="footer">
+				<p> Copyright by AiRonmen &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved </p>
+			
+			</div>
 
-	        <div class="footer">
-	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright AiRonmen &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	        </div>
-
-	      </div>
-    	</nav>
+		</div>
+		</nav>
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4" id="name">Prezentacja rozpoznawania obrazów</h2>
+        <h2 class="mb-4" id="name">Prezentacja analizy obrazów</h2>
 		<div>
 			<div class="col-sm-6 offset-sm-3 text-left">
 				<div class="info-form">
@@ -191,7 +197,7 @@
 					<div class="form-group">
 						<div class="custom-file">
 							<input type="file" onChange="update_submit_button_status();" class="form-control-file" id="selected_file" /><br>
-							<label class="custom-file-label" for="selected_file" id="file_name">Choose file</label>
+							<label class="custom-file-label" for="selected_file" id="file_name">Wybierz plik</label>
 							<script>
 								$('#selected_file').on('change',function(){
 									var fileName = document.querySelector('#selected_file').files[0].name;
@@ -202,7 +208,7 @@
 						<input type="text" class="form-control" id="prefered_name" placeholder="POI ID"
 							   maxlength="20">
 					</div>
-					<button disabled="true" id='submit_btn' onclick="send_button_click()" class="btn btn-primary">Upload</button>
+					<button disabled="true" id='submit_btn' onclick="send_button_click()" class="btn btn-primary">Rozpoznaj</button>
 				</div>
 				<br>
 			</div>

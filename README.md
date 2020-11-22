@@ -2,11 +2,11 @@
 
 Frontend for PFR hackathon
 
-URL:
+## URL
 
 Frontend is hosted currently on githup pages - it is shown on https://wlazlod.github.io
 
-Used technologies:
+## Used technologies
 
 * Bootstrap - https://getbootstrap.com
 * Leaflet (mapping) - https://leafletjs.com

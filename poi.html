@@ -162,7 +162,7 @@
 					var myChart = echarts.init(document.getElementById('barchart'));
 					
 					console.log(data)
-					data_list = [['Data', 'Liczba pasażerów na przystanku']]
+					data_list = [['Data', 'Zapełnienie autobusu na przystanku']]
 					for (x of data) {
 						data_list = data_list.concat([[timeConverter(x.ts), x.val]])
 					}

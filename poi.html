@@ -103,6 +103,13 @@
 		  <div class="col-sm-6" id="piecalendar" style="width: 100%; min-height: 400px">
 		  </div>
 		</div>
+		<div class="row">
+		  <div class="col-sm-6">
+		  </div>  
+		  <div class="col-sm-6">
+			<p class="font-italic text-center">*Dane wygenerowane losowo</p>
+		  </div>
+		</div>
 		
       </div>
 	</div>
@@ -143,10 +150,10 @@
 					  var year = a.getFullYear();
 					  var month = a.getMonth();
 					  var date = a.getDate();
-					  var hour = a.getHours();
-					  var min = a.getMinutes();
+					  var hour = a.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+					  var min = a.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
 					  var sec = a.getSeconds();
-					  var time = year + '/' + month + '/' + date
+					  var time = year + '/' + month + '/' + date + ' ' + hour + ':' + min
 					  return time;
 				}
 				
